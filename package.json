@@ -1,0 +1,32 @@
+{
+  "name": "infobot_tool",
+  "version": "0.0.0",
+  "description": "Консольное приложение, для оптимизации процесса подготовки к олимпиадам",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baalaandaa/infobot_tool.git"
+  },
+  "keywords": [
+    "cli",
+    "codeforces",
+    "cp"
+  ],
+  "author": "baalaandaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baalaandaa/infobot_tool/issues"
+  },
+  "homepage": "https://github.com/baalaandaa/infobot_tool#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^4.1.0",
+    "configstore": "^5.0.1",
+    "figlet": "^1.5.0",
+    "inquirer": "^7.3.3",
+    "open": "^7.1.0"
+  }
+}
