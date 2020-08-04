@@ -1,11 +1,29 @@
 const axios = require('axios').default;
-
-const open = require("open");
+const config = require('./config');
+const objectToQuerystring = (obj) => {
+    return Object.keys(obj).reduce(function (str, key, i) {
+        var delimiter, val;
+        delimiter = (i === 0) ? '?' : '&';
+        key = encodeURIComponent(key);
+        val = encodeURIComponent(obj[key]);
+        return [str, delimiter, key, '=', val].join('');
+    }, '');
+}
+const unauthedRequest = (method, data) => {
+    let qs = objectToQuerystring(data);
+    return new Promise((resolve, reject) => {
+        axios.get(`https://codeforces.com/api/${method}${qs}`).then(e => {
+            resolve(e.data);
+        }).catch(e => reject(e));
+    });
+}
 
 module.exports = {
 
-    //280c65b64e7192691ef1c1ddf65092e361315e71 key
-    //4d408e6f2999b5a4e7c00b04dd3ca81035c61b6b secret
-
+    getUser: (handle) => {
+        return unauthedRequest('user.info', {
+            handles: handle
+        });
+    }
 
 }
