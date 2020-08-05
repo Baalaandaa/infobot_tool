@@ -1,16 +1,15 @@
 var inquirer = require('inquirer');
 const clear = require('clear');
-module.exports = () => {
+module.exports = (kek) => {
     return new Promise((resolve, reject) => {
         inquirer.prompt([
             {
                 type: 'list',
                 name: 'menu',
-                message: 'Select menu option:',
+                message: kek,
                 choices: [
-                    'Get profile analisys',
-                    'Duels',
-                    'Exit'
+                    'Accept',
+                    'Decline'
                 ]
             }
         ]).then(answers => {

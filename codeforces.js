@@ -67,6 +67,10 @@ module.exports = {
         });
     },
 
+    getTasks: () => {
+        return unauthedRequest('problemset.problems', {});
+    },
+
     getSubmissions: (handle) => {
         return unauthedRequest('user.status', {
             handle: handle,

@@ -2,5 +2,7 @@ module.exports = {
     apiKey: require('./apikey'),
     apiSecret: require('./apiSecret'),
     handle: require('./handle'),
-    menu: require('./menu')
+    menu: require('./menu'),
+    queue: require('./queue'),
+    invite: require('./invite'),
 }

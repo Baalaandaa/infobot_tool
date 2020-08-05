@@ -1,21 +1,21 @@
 var inquirer = require('inquirer');
 const clear = require('clear');
-module.exports = () => {
+module.exports = (queue) => {
     return new Promise((resolve, reject) => {
         inquirer.prompt([
             {
                 type: 'list',
-                name: 'menu',
-                message: 'Select menu option:',
+                name: 'queue',
+                message: 'Select your opponent or join queue:',
                 choices: [
-                    'Get profile analisys',
-                    'Duels',
-                    'Exit'
+                    ...queue,
+                    'Cancel',
+                    'Join queue'
                 ]
             }
         ]).then(answers => {
             clear();
-            resolve(answers.menu)
+            resolve(answers.queue)
         }).catch(e => reject(e));
     })
 }
