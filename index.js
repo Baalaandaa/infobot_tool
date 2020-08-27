@@ -49,14 +49,28 @@ let duels = async () => {
                 await sendInvitation(handles[queue.indexOf(resp)]);
             }
         }
-
+        
+        let inter = null;
+        
         ws.on('open', async () => {
             console.log(chalk.green("WS connection ok"));
+            await ws.send(JSON.stringify({
+                action: 'sendMessage',
+                channelId: "General",
+                name: config.get('handle'),
+                content: {
+                    pwd: config.get('password')
+                }
+            }));
+            inter = setInterval(() => {
+                ws.send("ping");
+            }, 60 * 1000);
             await ask();
         })
 
         ws.on('close', () => {
             console.log(chalk.red("WS disconnect"));
+            clearInterval(inter);
             resolve();
         })
 
@@ -77,6 +91,7 @@ let duels = async () => {
         ws.on('message', async (data) => {
             // console.log(data);
             let req = JSON.parse(data);
+            console.log(req);
             if(req.content)
                 req.content = JSON.parse(req.content);
             if (req.event === 'channel_message') {
@@ -299,8 +314,9 @@ module.exports = () => {
         console.log(chalk.blue(d));
         console.log(chalk.yellow(`Current version: ${version}`));
         if (!config.get('handle')) config.set('handle', await prompts.handle());
-        if (!config.get('key')) config.set('key', await prompts.apiKey());
-        if (!config.get('secret')) config.set('secret', await prompts.apiSecret());
+        if (!config.get('password')) config.set('password', await prompts.password());
+        // if (!config.get('key')) config.set('key', await prompts.apiKey());
+        // if (!config.get('secret')) config.set('secret', await prompts.apiSecret());
         // cf.getUser(config.get('handle')).then(e => console.log('Привет, ' + colorHandle(e.result[0].handle, e.result[0].rating))).catch((e) => console.log(e));
         await menu();
     });

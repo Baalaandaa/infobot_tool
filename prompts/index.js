@@ -5,4 +5,5 @@ module.exports = {
     menu: require('./menu'),
     queue: require('./queue'),
     invite: require('./invite'),
+    password: require('./password')
 }
